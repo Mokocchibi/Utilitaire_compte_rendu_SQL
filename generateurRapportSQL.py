@@ -78,7 +78,7 @@ corresDefNomFichier = {
             }
         ],
         "APPARTIENT": [
-            "Tble permet de lier des produits et des catégories.",
+            "Cette Table permet de lier des produits et des catégories.",
             {
                 "id_product (int)": "identifiant unique du produit",
                 "id_categorie (int)": "identifiant unique de la catégorie"
@@ -95,10 +95,10 @@ corresDefNomFichier = {
             }
         ],
         "VISITEUR": [   
-            "",
+            "Cette table correspond à un utilisateur non identifié sur le site.",
             {
-                "id (int primary key not null)": "",
-                "email (varchar(50) unique)": ""
+                "id (int primary key not null)": "identifiant unique et clé primaire du visiteur",
+                "email (varchar(50) unique)": "identifiant unique du visiteur utilisé pour la commande"
             }
         ],
         "ADMINISTRATEUR": [
@@ -118,10 +118,10 @@ corresDefNomFichier = {
             }
         ],
         "EFFECTUE_PAR_CLIENT": [
-            "",
+            "Cette table fait une correspondance entre une commande et un client",
             {
-                "id_commande (int)": "",
-                "id_client (int)": ""
+                "id_commande (int)": "identifiant de la commande, fait partie de la clé primaire",
+                "id_client (int)": "identifiant du client, fait partie de la clé primaire"
             }
         ],
         "LIGNEPANIER": [
@@ -138,14 +138,7 @@ corresDefNomFichier = {
                 "id_client (int)": "id unique du client",
                 "id_panier (int)": "id unique du panier"
             }
-        ],
-        "PANIER_DE_VIS": [
-            "",
-            {
-                "id_visiteur (int)": "",
-                "id_panier (int)": ""
-            }
-        ],
+        ]
     }
 }
 
