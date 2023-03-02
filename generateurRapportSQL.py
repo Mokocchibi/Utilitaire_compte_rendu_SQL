@@ -228,7 +228,7 @@ try:
                             print(f"{name} : Autre")
     
     rapportGenere = "# Rapport SQL\n"
-
+    rapportGenere += "##### Enzo Bertel\n##### Felix Pautrel\n##### Luc Ndzamba\n##### Arnaud Leboeuf\n##### Alan Pierre Dit Hubert\n"
     if len(tables) > 0:
         rapportGenere += "## Création des tables\n"
         rapportGenere += "![Schéma relationnel](Capture d’écran du 2023-03-02 18-03-07.png)\n"
