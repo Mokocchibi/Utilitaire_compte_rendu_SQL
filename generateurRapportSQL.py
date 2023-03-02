@@ -2,6 +2,7 @@ import configparser
 import pysftp
 from pysftp import CnOpts
 import re
+import os
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -237,7 +238,7 @@ try:
 
     if len(tables) > 0:
         rapportGenere += "## Création des tables\n"
-        rapportGenere += "![Alt text](https://i.imgur.com/0hMjwMm.png \"Schéma relationnel\")\n"
+        rapportGenere += "![Schéma relationnel](https://i.imgur.com/0hMjwMm.png)\n"
         for fichier in tables:
             rapportGenere += fichier + "\n"
     if len(procedures) > 0:
