@@ -1,7 +1,6 @@
 import configparser
 import pysftp
 from pysftp import CnOpts
-import os
 import re
 
 config = configparser.ConfigParser()
@@ -41,60 +40,60 @@ corresDefNomFichier = {
     "Trigger_del_panier_de.sql": "Ce trigger supprime le panier dans la table panier quand le panier correspondant dans la table panier_de est supprimé.",
     "create_database.sql": {
         "PRODUCT": [
-            "",
+        "Cette table contient l'ensemble des produits du site.",
             {
-                "id (int primary key not null)": "qzefq",
-                "nom (varchar(25) )": "",
-                "prixunitaire (decimal(10,2))": "sefs",
-                "stocktotal (int)": "",
-                "description (text)": "",
-                "imageurl (varchar(500))": ""
+            "id (int primary key not null)": "identifiant unique du produit",
+            "nom (varchar(25) )": "nom du produit",
+            "prixunitaire (decimal(10,2))": "prix unitaire du produit",
+            "stocktotal (int)": "stock total disponible du produit",
+            "description (text)": "description détaillée du produit",
+            "imageurl (varchar(500))": "URL de l'image du produit"
             }
         ],
         "COMMANDE": [
-            "",
+        "Cette table contient les informations sur les commandes passées sur le site.",
             {
-                "id (int primary key not null)": "",
-                "prix (decimal(10,2))": "",
-                "date_demande (varchar(10))": "",
-                "adresse_postale (varchar(50))": ""
+            "id (int primary key not null)": "identifiant unique de la commande",
+            "prix (decimal(10,2))": "prix total de tous les produits commandés",
+            "date_demande (varchar(10))": "date de la commande",
+            "adresse_postale (varchar(50))": "adresse postale de livraison de la commande"
             }
         ],
         "LIGNECOMMANDE": [
-            "",
+        "Table est liéé à COMMANDE. Pour chaque produit dans COMMANDE, il existe une LIGNECOMMANDE qui contient les informations sur le produit, comme la quantité de ce-dernier.",
             {
-                "id_product (int)": "",
-                "numcommande (int)": "",
-                "quantite (int)": ""
+            "id_product (int)": "identifiant unique du produit dans la commande",
+            "numcommande (int)": "identifiant (non unique) lié à id de la table COMMANDE",
+            "quantite (int)": "quantité du produit incluse dans la commande"
             }
         ],
         "CATEGORIE": [
-            "",
+        "Cette table contient les catégories des produits disponibles sur le site. Un produit peut appartenir a 0, 1 ou plusieurs catégories en même temps.",
             {
-                "id (int primary key not null)": "",
-                "nom (varchar(20) unique)": "",
-                "theme (varchar(20))": "",
-                "description (varchar(100))": ""
+            "id (int primary key not null)": "identifiant unique de la catégorie",
+            "nom (varchar(20) unique)": "nom de la catégorie",
+            "theme (varchar(20))": "thème de la catégorie",
+            "description (varchar(100))": "description détaillée de la catégorie"
             }
         ],
         "APPARTIENT": [
-            "Cette table permet de lier des produits et des catégories.",
+            "Tble permet de lier des produits et des catégories.",
             {
-                "id_product (int)": "",
-                "id_categorie (int)": ""
+                "id_product (int)": "identifiant unique du produit",
+                "id_categorie (int)": "identifiant unique de la catégorie"
             }
         ],
         "CLIENT": [
-            "",
+            "La table CLIENT contient les informations sur les clients enregistrés sur le site.",
             {
-                "id (int primary key not null)": "",
-                "email (varchar(50) unique)": "",
-                "nom (varchar(20))": "",
-                "prenom (varchar(20))": "",
-                "motdepasse (varchar(100))": ""
+                "id (int primary key not null)": "Chaque client a un identifiant unique 'id'",
+                "email (varchar(50) unique)": "Chaque client a un un email unique 'email'",
+                "nom (varchar(20))": "nom du client",
+                "prenom (varchar(20))": "prenom du client",
+                "motdepasse (varchar(100))": "mot de passe (hashé) du client"
             }
         ],
-        "VISITEUR": [
+        "VISITEUR": [   
             "",
             {
                 "id (int primary key not null)": "",
@@ -102,19 +101,19 @@ corresDefNomFichier = {
             }
         ],
         "ADMINISTRATEUR": [
-            "",
+            "La table ADMINISTRATEUR contient les informations sur les administrateurs enregistrés sur le site. Les administateurs sont disctincts des clients, ils ne peuvent pas commander de produits et ne sont pas lier à un panier. Ils ont des accès spéciaux aux pages admin.",
             {
-                "id (int primary key not null)": "",
-                "nom (varchar(20))": "",
-                "prenom (varchar(20))": "",
-                "motdepasse (varchar(100))": ""
+                "id (int primary key not null)": "Chaque administrateur a un identifiant unique 'id'",
+                "nom (varchar(20))": "nom de l'admin",
+                "prenom (varchar(20))": "prenom de l'admin",
+                "motdepasse (varchar(100))": "mot de passe (hashé) de l'admin"
             }
         ],
         "PANIER": [
-            "",
+            "Chaque PANIER est lié à un client",
             {
-                "id (int primary key)": "",
-                "prix (int)": ""
+                "id (int primary key)": "id unique du panier",
+                "prix (int)": "prix total des produits contenus dans le panier"
             }
         ],
         "EFFECTUE_PAR_CLIENT": [
@@ -125,18 +124,18 @@ corresDefNomFichier = {
             }
         ],
         "LIGNEPANIER": [
-            "",
+            "Table est liéé à PANIER. Pour chaque produit dans PANIER, il existe une LIGNEPANIER qui contient les informations sur le produit, comme la quantité de ce-dernier.",
             {
-                "id_product (int)": "",
-                "id_panier (int)": "",
-                "quantite (int)": ""
+                "id_product (int)": "id unique du produit",
+                "id_panier (int)": "id unique du panier, lié à id de PANIER",
+                "quantite (int)": "quantité du produit"
             }
         ],
         "PANIER_DE": [
-            "",
+            "Table liant le client à son panier",
             {
-                "id_client (int)": "",
-                "id_panier (int)": ""
+                "id_client (int)": "id unique du client",
+                "id_panier (int)": "id unique du panier"
             }
         ],
         "PANIER_DE_VIS": [
