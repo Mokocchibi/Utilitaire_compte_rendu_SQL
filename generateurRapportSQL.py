@@ -1,6 +1,7 @@
 import configparser
 import pysftp
 from pysftp import CnOpts
+import os
 import re
 
 config = configparser.ConfigParser()
@@ -253,7 +254,17 @@ try:
             rapportGenere += fichier + "\n"
 
     rapportGenere += "\n###### Ce rapport a été généré via un programme disponible ici : https://github.com/Mokocchibi/Utilitaire_compte_rendu_SQL.git"
-    print(rapportGenere)
+    
+    nom_fichier = "rapportSQL.md"
+    
+    if os.path.exists(nom_fichier):
+        with open(nom_fichier, "w"):
+            pass
+    
+    with open(nom_fichier, "w") as f:
+    	f.write(rapportGenere)
+    
+    #print(rapportGenere)
 
 except pysftp.HostKeysException as e:
     print(f"Error: {e}")
