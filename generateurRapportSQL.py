@@ -237,6 +237,7 @@ try:
 
     if len(tables) > 0:
         rapportGenere += "## Création des tables\n"
+        rapportGenere += "![Alt text](https://i.imgur.com/0hMjwMm.png \"Schéma relationnel\")\n"
         for fichier in tables:
             rapportGenere += fichier + "\n"
     if len(procedures) > 0:
